@@ -1,0 +1,17 @@
+{
+    "name": "bmcfarlin/worldnet-php-sdk",
+    "description": "A PHP Sdk for Worldnet Payments",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ben McFarlin",
+            "email": "ben@qeala.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+     "autoload": {
+        "psr-4": {"Worldnet\\": "src/"}
+    }
+}
