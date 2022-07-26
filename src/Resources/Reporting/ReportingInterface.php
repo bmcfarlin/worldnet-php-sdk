@@ -25,7 +25,9 @@ class ReportingInterface
   public function list($terminal, $filter = [])
   {
     $filter['terminal'] = $terminal;
-    $filter['pageSize'] = 100;
+    if(!array_key_exists('pageSize', $filter)){
+      $filter['pageSize'] = 250;
+    }
     $url = "/merchant/api/v1/reporting/terminals/{$terminal}/batches/closed";
     $token = $this->_client->getToken();
     $header = ["Content-Type: application/json", "Authorization: Bearer $token"];
@@ -40,7 +42,9 @@ class ReportingInterface
   */
   public function get($terminal, $uniqueReference, $filter = [])
   {
-    $filter['pageSize'] = 100;
+    if(!array_key_exists('pageSize', $filter)){
+      $filter['pageSize'] = 250;
+    }
     $url = "/merchant/api/v1/reporting/terminals/{$terminal}/batches/{$uniqueReference}/closed/transactions";
     $token = $this->_client->getToken();
     $header = ["Content-Type: application/json", "Authorization: Bearer $token"];

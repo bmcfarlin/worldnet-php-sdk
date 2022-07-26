@@ -1,6 +1,7 @@
 {
     "name": "bmcfarlin/worldnet-php-sdk",
     "description": "A PHP Sdk for Worldnet Payments",
+    "version": "1.1.0",
     "type": "library",
     "license": "MIT",
     "authors": [

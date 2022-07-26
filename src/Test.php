@@ -21,8 +21,7 @@
   //   print("$json\n");
   // }
 
-  // $terminal = "4159001";
-  // $item = $worldnet->terminal->devices($terminal);
+  // $item = $worldnet->terminal->devices(WORLDNET_TERMINAL_ID);
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
@@ -31,24 +30,29 @@
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
-  // $terminal = "4159001";
-  // $item = $worldnet->transaction->search($terminal);
-  // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  // print("$json\n");
+  $afterDate = '2022-07-20T00:00:00Z';
+  $beforeDate = '2022-07-21T00:00:00Z';
+  $panFirstSix = '';
+  $panLastFour = '';
+  $filter = ['afterDate' => $afterDate, 'beforeDate' => $beforeDate, 'panFirstSix' => $panFirstSix, 'panLastFour' => $panLastFour];
+  $item = $worldnet->transaction->search(WORLDNET_TERMINAL_ID, $filter);
+  $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  print("$json\n");
+
+  $count = count($item->data);
+  print("count:$count\n");
 
   // $url = "/merchant/api/v1/transaction/payments/E41OS37G0X";
   // $item = $worldnet->link->follow($url);
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
-  // $terminal = "4159001";
-  // $item = $worldnet->reporting->list($terminal);
+  // $item = $worldnet->reporting->list(WORLDNET_TERMINAL_ID);
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
-  // $terminal = "4159001";
   // $uniqueRef = "BAHIMOA9NJ";
-  // $item = $worldnet->reporting->get($terminal, $uniqueRef);
+  // $item = $worldnet->reporting->get(WORLDNET_TERMINAL_ID, $uniqueRef);
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
@@ -57,23 +61,22 @@
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
-  $terminal = "4159001";
-  $tz = new DateTimeZone('America/New_York');
-  $dtm = new DateTime('now', $tz);
-  $date = $dtm->format('Ymd');
-  $order_id = sprintf("order-%s", $date);
-  $totalAmount = 10.51;
-  $order = ['order_id' => $order_id, 'totalAmount' => $totalAmount, 'currency' => 'USD'];
-  $cardNumber = '5413330089604111';
-  $cardDetails = ['dataFormat' => 'PLAIN_TEXT', 'cardNumber' => $cardNumber];
-  $customerAccount = ['payloadType' => 'KEYED', 'cardDetails' => $cardDetails];
-  $data = ['terminal' => $terminal, 'order' => $order, 'customerAccount' => $customerAccount];
+  // $tz = new DateTimeZone('America/New_York');
+  // $dtm = new DateTime('now', $tz);
+  // $date = $dtm->format('Ymd');
+  // $order_id = sprintf("order-%s", $date);
+  // $totalAmount = 10.51;
+  // $order = ['order_id' => $order_id, 'totalAmount' => $totalAmount, 'currency' => 'USD'];
+  // $cardNumber = '5413330089604111';
+  // $cardDetails = ['dataFormat' => 'PLAIN_TEXT', 'cardNumber' => $cardNumber];
+  // $customerAccount = ['payloadType' => 'KEYED', 'cardDetails' => $cardDetails];
+  // $data = ['terminal' => WORLDNET_TERMINAL_ID, 'order' => $order, 'customerAccount' => $customerAccount];
   // $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
   // die;
 
-  $item = $worldnet->transaction->create($data);
-  $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  print("$json\n");
+  // $item = $worldnet->transaction->create($data);
+  // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  // print("$json\n");
 
  

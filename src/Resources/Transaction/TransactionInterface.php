@@ -20,8 +20,9 @@ class TransactionInterface
   public function search($terminal, $filter = [])
   {
     $filter['terminal'] = $terminal;
-    $filter['pageSize'] = 100;
-    $filter['batchType'] = 'CLOSED';
+    if(!array_key_exists('pageSize', $filter)){
+      $filter['pageSize'] = 250;
+    }
     $url = "/merchant/api/v1/transaction/transactions";
     $token = $this->_client->getToken();
     $header = ["Content-Type: application/json", "Authorization: Bearer $token"];
