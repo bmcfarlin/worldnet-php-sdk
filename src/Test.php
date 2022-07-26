@@ -30,6 +30,7 @@
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
 
+
   $afterDate = '2022-07-20T00:00:00Z';
   $beforeDate = '2022-07-21T00:00:00Z';
   $panFirstSix = '';
