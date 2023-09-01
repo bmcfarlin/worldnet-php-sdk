@@ -21,6 +21,7 @@
   //   print("$json\n");
   // }
 
+
   // $item = $worldnet->terminal->devices(WORLDNET_TERMINAL_ID);
   // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   // print("$json\n");
@@ -31,17 +32,17 @@
   // print("$json\n");
 
 
-  $afterDate = '2022-07-20T00:00:00Z';
-  $beforeDate = '2022-07-21T00:00:00Z';
-  $panFirstSix = '';
-  $panLastFour = '';
-  $filter = ['afterDate' => $afterDate, 'beforeDate' => $beforeDate, 'panFirstSix' => $panFirstSix, 'panLastFour' => $panLastFour];
-  $item = $worldnet->transaction->search(WORLDNET_TERMINAL_ID, $filter);
-  $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  print("$json\n");
+  // $afterDate = '2022-07-20T00:00:00Z';
+  // $beforeDate = '2022-07-21T00:00:00Z';
+  // $panFirstSix = '123456';
+  // $panLastFour = '1234';
+  // $filter = ['afterDate' => $afterDate, 'beforeDate' => $beforeDate, 'panFirstSix' => $panFirstSix, 'panLastFour' => $panLastFour];
+  // $item = $worldnet->transaction->search(WORLDNET_TERMINAL_ID, $filter);
+  // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  // print("$json\n");
 
-  $count = count($item->data);
-  print("count:$count\n");
+  // $count = count($item->data);
+  // print("count:$count\n");
 
   // $url = "/merchant/api/v1/transaction/payments/E41OS37G0X";
   // $item = $worldnet->link->follow($url);

@@ -26,7 +26,7 @@ class ReportingInterface
   {
     $filter['terminal'] = $terminal;
     if(!array_key_exists('pageSize', $filter)){
-      $filter['pageSize'] = 250;
+      $filter['pageSize'] = 100;
     }
     $url = "/merchant/api/v1/reporting/terminals/{$terminal}/batches/closed";
     $token = $this->_client->getToken();
@@ -43,7 +43,7 @@ class ReportingInterface
   public function get($terminal, $uniqueReference, $filter = [])
   {
     if(!array_key_exists('pageSize', $filter)){
-      $filter['pageSize'] = 250;
+      $filter['pageSize'] = 100;
     }
     $url = "/merchant/api/v1/reporting/terminals/{$terminal}/batches/{$uniqueReference}/closed/transactions";
     $token = $this->_client->getToken();

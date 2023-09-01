@@ -21,7 +21,7 @@ class TransactionInterface
   {
     $filter['terminal'] = $terminal;
     if(!array_key_exists('pageSize', $filter)){
-      $filter['pageSize'] = 250;
+      $filter['pageSize'] = 100;
     }
     $url = "/merchant/api/v1/transaction/transactions";
     $token = $this->_client->getToken();
