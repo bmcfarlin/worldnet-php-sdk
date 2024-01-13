@@ -57,10 +57,6 @@
 
   die;
 
-  // "transaction-api:full-access",
-  // "reporting-api:full-access",
-  // "account-api:full-access",
-  // "customer-api:full-access"
 
   // $afterDate = '2022-07-20T00:00:00Z';
   // $beforeDate = '2022-07-21T00:00:00Z';

@@ -24,10 +24,15 @@ class Client
   function __construct($api_key, $base_url)
   {
     $this->_client = new RestClient($api_key, $base_url);
-    $aitem = $this->account->authenticate();
-    $json = json_encode($aitem, JSON_PRETTY_PRINT);
+
+    $item = $this->account->authenticate();
+    $json = json_encode($item, JSON_PRETTY_PRINT);
     print("$json\n");
-    // $this->boarding->authenticate();
+
+    // "transaction-api:full-access",
+    // "reporting-api:full-access",
+    // "account-api:full-access",
+    // "customer-api:full-access"
   }
 
   function __toString()
