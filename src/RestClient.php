@@ -7,6 +7,7 @@ class RestClient
   private $_api_key;
   private $_base_url;
   private $_token;
+  private $_btoken;
 
   function __construct($api_key = null, $base_url = null)
   {
@@ -49,6 +50,16 @@ class RestClient
     return $this->_token;
   }
 
+  function setBToken($token)
+  {
+    $this->_btoken = $token;
+  }
+
+  function getBToken()
+  {
+    return $this->_btoken;
+  }
+
   function get($path, $header = [], $payload = [])
   {
     
@@ -62,11 +73,11 @@ class RestClient
     }
 
     if($debug){
-      print("$url\n");
+      print("$url\n\n");
     }
 
     if($debug){
-      print(json_encode($header) . PHP_EOL);
+      print(json_encode($header) . PHP_EOL . PHP_EOL);
     }
 
     $dtm = new \DateTime('now');
@@ -79,9 +90,7 @@ class RestClient
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    if($debug){
-      curl_setopt($ch, CURLOPT_HEADER, true);
-    }
+    curl_setopt($ch, CURLOPT_HEADER, false);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
     $response = curl_exec($ch);
@@ -93,7 +102,7 @@ class RestClient
     if($debug){
       $information = curl_getinfo($ch);
       $information = json_encode($information, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-      print("$information\n");
+      print("$information\n\n");
     }
 
     curl_close($ch);
@@ -104,7 +113,7 @@ class RestClient
   function post($path, $payload = [], $custom_request = null)
   {
 
-    $debug = true;
+    $debug = false;
 
     $url = sprintf("%s%s", $this->_base_url, $path);
 
@@ -119,7 +128,7 @@ class RestClient
     $method = 'POST';
 
     if($debug){
-      print(json_encode($custom_request) . PHP_EOL);
+      print(json_encode($custom_request) . PHP_EOL . PHP_EOL);
     }
 
     if($custom_request)
@@ -138,7 +147,7 @@ class RestClient
     $data = implode('', $items);
 
     if($debug){
-      print("$data\n");
+      print("$data\n\n");
     }
 
     $signature = hash_hmac('sha256', $data, $this->_api_secret);
@@ -152,7 +161,7 @@ class RestClient
     $fields = $payload;
 
     if($debug){
-      print(json_encode($fields) . PHP_EOL);
+      print(json_encode($fields) . PHP_EOL . PHP_EOL);
     }
 
     $ch = curl_init();
@@ -173,14 +182,14 @@ class RestClient
     $response = curl_exec($ch);
 
     if($debug){
-      print("$response\n");
+      print("$response\n\n");
     }
 
     $information = curl_getinfo($ch);
     $information = json_encode($information, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
     if($debug){
-      print("$information\n");
+      print("$information\n\n");
     }
 
     curl_close($ch);

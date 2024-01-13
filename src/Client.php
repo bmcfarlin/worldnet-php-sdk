@@ -7,6 +7,8 @@ use Worldnet\Resources\Reporting\ReportingInterface;
 use Worldnet\Resources\Transaction\TransactionInterface;
 use Worldnet\Resources\Account\AccountInterface;
 use Worldnet\Resources\Terminal\TerminalInterface;
+use Worldnet\Resources\Boarding\BoardingInterface;
+use Worldnet\Resources\Device\DeviceInterface;
 
 class Client
 {
@@ -15,11 +17,13 @@ class Client
   private $_terminal;
   private $_reporting;
   private $_transaction;
+  private $_boarding;
 
   function __construct($api_key, $base_url)
   {
     $this->_client = new RestClient($api_key, $base_url);
     $this->account->authenticate();
+    $this->boarding->authenticate();
   }
 
   function __toString()
@@ -82,4 +86,23 @@ class Client
     }
     return $this->_link;
   }
+
+  function getBoarding()
+  {
+    if(empty($this->_boarding))
+    {
+      $this->_boarding = new BoardingInterface($this->_client);
+    }
+    return $this->_boarding;
+  }
+
+  function getDevice()
+  {
+    if(empty($this->_device))
+    {
+      $this->_device = new DeviceInterface($this->_client);
+    }
+    return $this->_device;
+  }
+
 }

@@ -5,11 +5,27 @@
   include_once(__DIR__ . '/Resources/Transaction/TransactionInterface.php');
   include_once(__DIR__ . '/Resources/Account/AccountInterface.php');
   include_once(__DIR__ . '/Resources/Terminal/TerminalInterface.php');
+  include_once(__DIR__ . '/Resources/Boarding/BoardingInterface.php');
+  include_once(__DIR__ . '/Resources/Device/DeviceInterface.php');
   include_once(__DIR__ . '/RestClient.php');
   include_once(__DIR__ . '/Client.php');
   include_once(__DIR__ . '/Settings.php');
 
   $worldnet = new \Worldnet\Client(WORLDNET_API_KEY, WORLDNET_BASE_URL);
+
+  die;
+
+  /************************
+  *  Device
+  ************************/
+
+  $item = $worldnet->device->search();
+  foreach($item->data as $item){
+    $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    print("$json\n");
+  }
+
+  die;
 
   /************************
   *  Account              *

@@ -30,12 +30,30 @@ class TransactionInterface
     return json_decode($json);
   }
 
+  public function get($uniqueRef)
+  {
+    $url = sprintf("/merchant/api/v1/transaction/payments/%s", $uniqueRef);
+    $token = $this->_client->getToken();
+    $header = ["Content-Type: application/json", "Authorization: Bearer $token"];
+    $json = $this->_client->get($url, $header);
+    return json_decode($json);
+  }
+
   public function create($data = [])
   {
     $url = "/merchant/api/v1/transaction/payments";
     $token = $this->_client->getToken();
     $header = ["Content-Type: application/json", "Authorization: Bearer $token"];
     $json = $this->_client->post($url, $header, $data);
+    return json_decode($json);
+  }
+
+  public function update($uniqueRef, $data = [])
+  {
+    $url = sprintf("/merchant/api/v1/transaction/payments/%s", $uniqueRef);
+    $token = $this->_client->getToken();
+    $header = ["Content-Type: application/json", "Authorization: Bearer $token"];
+    $json = $this->_client->patch($url, $header, $data);
     return json_decode($json);
   }
 
