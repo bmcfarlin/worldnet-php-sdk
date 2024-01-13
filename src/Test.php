@@ -7,46 +7,60 @@
   include_once(__DIR__ . '/Resources/Terminal/TerminalInterface.php');
   include_once(__DIR__ . '/Resources/Boarding/BoardingInterface.php');
   include_once(__DIR__ . '/Resources/Device/DeviceInterface.php');
+  include_once(__DIR__ . '/Resources/Bank/BankInterface.php');
   include_once(__DIR__ . '/RestClient.php');
   include_once(__DIR__ . '/Client.php');
   include_once(__DIR__ . '/Settings.php');
 
   $worldnet = new \Worldnet\Client(WORLDNET_API_KEY, WORLDNET_BASE_URL);
 
-  die;
 
   /************************
   *  Device
   ************************/
 
-  $item = $worldnet->device->search();
-  foreach($item->data as $item){
-    $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-    print("$json\n");
-  }
-
-  die;
-
-  /************************
-  *  Account              *
-  ************************/
-
-  // $item = $worldnet->terminal->list();
+  // $item = $worldnet->device->search();
   // foreach($item->data as $item){
   //   $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
   //   print("$json\n");
   // }
 
+  // die;
 
-  // $item = $worldnet->terminal->devices(WORLDNET_TERMINAL_ID);
-  // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  // print("$json\n");
+  /************************
+  *  Account              *
+  ************************/
 
-  // $url = "/merchant/api/v1/account/terminals/4159001/devices/BBPOS_CHP2X";
-  // $item = $worldnet->link->follow($url);
-  // $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-  // print("$json\n");
+  $item = $worldnet->terminal->list();
+  foreach($item->data as $item){
+    $terminalNumber = $item->terminalNumber;
+    print("$terminalNumber\n");
 
+    //$json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    //print("$json\n");
+
+    $sitem = $worldnet->terminal->devices($terminalNumber);
+    $sjson = json_encode($sitem, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    //print("$sjson\n");
+
+    foreach($sitem->data as $sitem){
+      $type = $sitem->type;
+      print("$type\n");
+    }
+
+  }
+
+  $url = sprintf("/merchant/api/v1/account/terminals/%s/devices/BBPOS_CHP2X", WORLDNET_TERMINAL_ID);
+  $item = $worldnet->link->follow($url);
+  $json = json_encode($item, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+  print("$json\n");
+
+  die;
+
+  // "transaction-api:full-access",
+  // "reporting-api:full-access",
+  // "account-api:full-access",
+  // "customer-api:full-access"
 
   // $afterDate = '2022-07-20T00:00:00Z';
   // $beforeDate = '2022-07-21T00:00:00Z';

@@ -9,6 +9,7 @@ use Worldnet\Resources\Account\AccountInterface;
 use Worldnet\Resources\Terminal\TerminalInterface;
 use Worldnet\Resources\Boarding\BoardingInterface;
 use Worldnet\Resources\Device\DeviceInterface;
+use Worldnet\Resources\Bank\BankInterface;
 
 class Client
 {
@@ -18,12 +19,15 @@ class Client
   private $_reporting;
   private $_transaction;
   private $_boarding;
+  private $_bank;
 
   function __construct($api_key, $base_url)
   {
     $this->_client = new RestClient($api_key, $base_url);
-    $this->account->authenticate();
-    $this->boarding->authenticate();
+    $aitem = $this->account->authenticate();
+    $json = json_encode($aitem, JSON_PRETTY_PRINT);
+    print("$json\n");
+    // $this->boarding->authenticate();
   }
 
   function __toString()
@@ -103,6 +107,15 @@ class Client
       $this->_device = new DeviceInterface($this->_client);
     }
     return $this->_device;
+  }
+
+  function getBank()
+  {
+    if(empty($this->_bank))
+    {
+      $this->_bank = new BankInterface($this->_client);
+    }
+    return $this->_bank;
   }
 
 }
